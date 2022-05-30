@@ -13,6 +13,33 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <div class="nav-bar">
+      <%= link_to root_path, class: "nav-brand" do %>
+        <h1 class="title">Eventnotsobrite</h1>
+      <% end %>
+      <div class="nav-menu">
+        <% if user_signed_in? %>
+          <p class="control">
+            <%= link_to 'New Event', new_event_path, class: 'button' %>
+          </p>
+        <% end %>
+        <% if user_signed_in? %>
+          <p class="control">
+            <%= link_to current_user.name, edit_user_registration_path, class: 'button' %>
+          </p>
+          <p class="control">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'button' %>
+          </p>
+        <% else %>
+          <p class="control">
+            <%= link_to 'Sign In', new_user_session_path, class: 'button' %>
+          </p>
+          <p class="control">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'button' %>
+          </p>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
