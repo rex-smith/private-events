@@ -1,5 +1,5 @@
 <h1>Event List:</h1>
-<% for event in @events %>
+<% @events.each do |event| %>
   <p>
     <%= event.name %>
     <%= event.date %>
