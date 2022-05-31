@@ -1,0 +1,7 @@
+<h2>Attendees:</h2>
+<% @attendances.each do |attendances| %>
+  <div class="event-list">
+    <div class="event-name"><%= attendance.attended_event.name %></div>
+    <div class="event-date"><%= attendance.attendee.name %></div>
+  </div>
+<% end %>

@@ -1,7 +1,19 @@
 <div class="center-container">
   <div class="event-container">
     <div class="event-name"><%= @event.name %></div>
+    <br>
     <div class="event-date"><%= @event.date %></div>
-    <%= link_to 'Edit Event', edit_event_path, class: 'button' %>
+    <div class="container">
+      <% @event.attendees.each do |attendee| %>
+        <div class="name"><%= attendee.name %></div>
+      <% end %>
+    </div>
+    <div class="center-container">
+      <% if @event.creator_id == current_user.id %>
+        <%= link_to 'Edit Event', edit_event_path, class: 'button' %>
+      <% else %>
+        <%= button_to 'Attend Event', attendances_path, method: :post, class: 'button' %>
+      <% end %>
+    </div>
   </div>
 </div>
