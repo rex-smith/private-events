@@ -4,7 +4,16 @@
     <div class="event-name"><%= link_to event.name, event %></div>
     <div class="event-date"><%= event.date %></div>
     <% if user_signed_in? %>
-      <div class="button"><%= link_to 'Attend Event', attendances_path, method: :post %></div>
+      <% if event.creator_id == current_user.id %>
+        <%= link_to 'Edit Event', edit_event_path, class: 'button' %>
+      <% else %>
+        <% if event.attendees.include?(current_user) %>
+          <% attendance = Attendance.find_by(attended_event_id: event.id, attendee_id: current_user.id) %>
+          <%= button_to 'Cancel Attendance', attendance_path(id: attendance.id, event_id: event.id), method: :delete, class: 'button' %>
+        <% else %>
+          <%= button_to 'Attend Event', attendances_path(event_id: event.id), method: :post, class: 'button' %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

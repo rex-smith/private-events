@@ -19,7 +19,7 @@ class AttendancesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    @attendance = current_user.build(attendance_params)
+    @attendance = Attendance.new(attended_event_id: @event.id, attendee_id: current_user.id)
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to event_url(@event), notice: "Attendance was successfully created." }
@@ -32,17 +32,12 @@ class AttendancesController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:event_id])
     @attendance = Attendance.find(params[:id])
-    @event = @attendance.attended_event
     @attendance.destroy
     flash[:notice] = "You have successfully canceled your attendance to '#{@event.name}'."
     redirect_to events_path
   end
 
-  private
-
-  def attendance_params
-    params.require(:attendance).permit(:attendee_id, :attended_event_id)
-  end
-
+  
 end
