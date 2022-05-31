@@ -23,8 +23,7 @@
             <%= link_to 'New Event', new_event_path, class: 'button' %>
           </p>
           <p class="control">
-            <%= link_to 'My Events', events_path, class: 'button' %>
-            <%# Issue above %>
+            <%= link_to 'My Events', current_user, class: 'button' %>
           </p>
         <% end %>
         <% if user_signed_in? %>
@@ -32,7 +31,7 @@
             <%= link_to current_user.name, edit_user_registration_path, class: 'button' %>
           </p>
           <p class="control">
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'button' %>
+            <%= link_to 'Logout', destroy_user_session_path, data: { "turbo-method": :delete }, class: 'button' %>
           </p>
         <% else %>
           <p class="control">

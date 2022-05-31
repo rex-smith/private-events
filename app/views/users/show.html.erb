@@ -1,6 +1,8 @@
 <% @events.each do |event| %>
-  <p>
-    <%= event.name %>
-    <%= event.date %>
-  </p>
+
+  <div class="event-list">
+    <div class="event-name"><%= link_to event.name, event %></div>
+    <div class="event-date"><%= event.date %></div>
+  </div>
+
 <% end %>

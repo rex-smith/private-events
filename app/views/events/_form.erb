@@ -1,0 +1,21 @@
+<div class="center-container">
+  <div class="form-container">
+    <h2>Event</h2>
+    <%= form_with(model: @event, local: true) do |form| %>
+    
+      <div class="field">
+        <%= form.label :name, 'Name' %>
+        <%= form.text_field :name, autofocus: true, autocomplete: "name"  %>
+      </div>
+    
+      <div class="field">
+        <%= form.label :date, 'Date' %>
+        <%= form.datetime_local_field :date %>
+      </div>
+      <br>
+      <div class="center-container">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
