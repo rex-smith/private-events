@@ -43,6 +43,14 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def past
+    @events = Event.where('date < ?', DateTime.now)
+  end
+
+  def future
+    @events = Event.where('date >= ?', DateTime.now)
+  end
+
   private
 
     def event_params
