@@ -1,8 +1,52 @@
-<% @events.each do |event| %>
-
-  <div class="event-list">
-    <div class="event-name"><%= link_to event.name, event %></div>
-    <div class="event-date"><%= event.date %></div>
+<h2>Upcoming Events:</h2>
+<div class="container-row border-container">
+  <div class="container-column half">
+    <h2>Attended Events:</h2>
+    <% current_user.attended_events.where('date >= ?', DateTime.now).each do |event| %>
+  
+      <div class="event-list">
+        <div class="event-name"><%= link_to event.name, event %></div>
+        <div class="event-date"><%= event.date %></div>
+      </div>
+  
+    <% end %>
   </div>
 
-<% end %>
+  <div class="container-column half">
+    <h2>Hosted Events:</h2>
+    <% @created_events.each do |event| %>
+  
+      <div class="event-list">
+        <div class="event-name"><%= link_to event.name, event %></div>
+        <div class="event-date"><%= event.date %></div>
+      </div>
+  
+    <% end %>
+  </div>
+</div>
+
+<h2>Past Events:</h2>
+<div class="container-row border-container">
+  <div class="container-column half">
+    <h2>Attended Events:</h2>
+    <% current_user.attended_events.where('date < ?', DateTime.now).each do |event| %>
+      <div class="event-list">
+        <div class="event-name"><%= link_to event.name, event %></div>
+        <div class="event-date"><%= event.date %></div>
+      </div>
+  
+    <% end %>
+  </div>
+  
+  <div class="container-column half">
+    <h2>Hosted Events:</h2>
+    <% @created_events.each do |event| %>
+  
+      <div class="event-list">
+        <div class="event-name"><%= link_to event.name, event %></div>
+        <div class="event-date"><%= event.date %></div>
+      </div>
+  
+    <% end %>
+  </div>
+</div>
